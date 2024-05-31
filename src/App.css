@@ -30,6 +30,13 @@
   color: #faee00;
   font-weight: bold;
   font-size: xx-large;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.7s ease;
+}
+
+.Series-title:hover {
+  transform: scale(1.1) perspective(1em);
 }
 
 .Icon-container {
