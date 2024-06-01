@@ -1,8 +1,15 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Icon({ src, alt, color }) {
-    const [className, setClassName] = useState("Icon-image");
+    const [className, setClassName] = useState(() => {
+        const localStorageValue = localStorage.getItem(`${src}_className`);
+        return localStorageValue ? localStorageValue : "Icon-image";
+    });
+    
+    useEffect(() => {
+        localStorage.setItem(`${src}_className`, className);
+    }, [className, src]);
     
     const onClick = () => {
         if (className === "Icon-image") setClassName("Icon-image-selected");
