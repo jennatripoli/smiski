@@ -1,9 +1,16 @@
 import './App.css';
 import Icon from './Icon.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Series({ name, folder, primary, background }) {
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(() => {
+        const localStorageValue = localStorage.getItem(`${folder}_hidden`);
+        return localStorageValue ? JSON.parse(localStorageValue) : false;
+    });
+    
+    useEffect(() => {
+        localStorage.setItem(`${folder}_hidden`, hidden);
+    }, [hidden, folder]);
 
     let images = null;
     if (folder === "s1") images = require.context("./s1", true);
