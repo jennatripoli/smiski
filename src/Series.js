@@ -33,7 +33,7 @@ function Series({ name, folder, primary, background }) {
     return (
         <div className="Series" style={!hidden ? {backgroundColor: background} : null}>
             <div className="Series-title" style={{backgroundColor: primary}} onClick={() => setHidden(!hidden)}>{name}</div>
-            <div className="Icon-container">
+            <div className="Icon-container" style={hidden ? {margin: 0} : null}>
                 {!hidden ?
                     imageList.map((image, index) => (
                         <Icon key={index} src={image} alt={image.substring(14, image.indexOf("."))} color={primary} />
