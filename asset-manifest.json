@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/smiski/static/css/main.fa9d1028.css",
-    "main.js": "/smiski/static/js/main.9e890649.js",
+    "main.css": "/smiski/static/css/main.6cbc227f.css",
+    "main.js": "/smiski/static/js/main.2bf3e24e.js",
     "static/js/453.791e6bfe.chunk.js": "/smiski/static/js/453.791e6bfe.chunk.js",
     "static/media/Smiski Balancing Boxes.png": "/smiski/static/media/Smiski Balancing Boxes.056518ea5b1664b2f27b.png",
     "static/media/Green Thumb Smiski.png": "/smiski/static/media/Green Thumb Smiski.0f73e13e0cc923467de2.png",
@@ -89,12 +89,12 @@
     "static/media/Smiski Bridge.png": "/smiski/static/media/Smiski Bridge.bffdfe29f07a4e878e0f.png",
     "static/media/top_logo.png": "/smiski/static/media/top_logo.e475ad2d16ddcc34569e.png",
     "index.html": "/smiski/index.html",
-    "main.fa9d1028.css.map": "/smiski/static/css/main.fa9d1028.css.map",
-    "main.9e890649.js.map": "/smiski/static/js/main.9e890649.js.map",
+    "main.6cbc227f.css.map": "/smiski/static/css/main.6cbc227f.css.map",
+    "main.2bf3e24e.js.map": "/smiski/static/js/main.2bf3e24e.js.map",
     "453.791e6bfe.chunk.js.map": "/smiski/static/js/453.791e6bfe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa9d1028.css",
-    "static/js/main.9e890649.js"
+    "static/css/main.6cbc227f.css",
+    "static/js/main.2bf3e24e.js"
   ]
 }
