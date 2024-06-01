@@ -19,7 +19,7 @@ function Icon({ src, alt, color }) {
     return (
         <div className="Icon">
             {src ? 
-                <img className={className} src={src} alt={alt} onClick={onClick} /> :
+                <img className={className} style={{backgroundColor: color}} src={src} alt={alt} onClick={onClick} /> :
                 <div className={className} style={{backgroundColor: color}} alt={alt} onClick={onClick}>?</div>
             }
             <label className="Icon-title">{alt}</label>

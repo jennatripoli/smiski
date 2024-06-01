@@ -13,10 +13,21 @@ function Series({ name, folder, primary, background }) {
     }, [hidden, folder]);
 
     let images = null;
-    if (folder === "s1") images = require.context("./s1", true);
-    else if (folder === "s2") images = require.context("./s2", true);
-    else if (folder === "s3") images = require.context("./s3", true);
-    else if (folder === "s4") images = require.context("./s4", true);
+    if (folder === "one") images = require.context("./icons/one", true);
+    else if (folder === "two") images = require.context("./icons/two", true);
+    else if (folder === "three") images = require.context("./icons/three", true);
+    else if (folder === "four") images = require.context("./icons/four", true);
+    else if (folder === "toilet") images = require.context("./icons/toilet", true);
+    else if (folder === "bath") images = require.context("./icons/bath", true);
+    else if (folder === "living") images = require.context("./icons/living", true);
+    else if (folder === "bed") images = require.context("./icons/bed", true);
+    else if (folder === "yoga") images = require.context("./icons/yoga", true);
+    else if (folder === "cheer") images = require.context("./icons/cheer", true);
+    else if (folder === "museum") images = require.context("./icons/museum", true);
+    else if (folder === "@work") images = require.context("./icons/@work", true);
+    else if (folder === "dressing") images = require.context("./icons/dressing", true);
+    else if (folder === "exercising") images = require.context("./icons/exercising", true);
+    else if (folder === "moving") images = require.context("./icons/moving", true);
     const imageList = images.keys().map(image => images(image));
 
     return (
@@ -25,11 +36,11 @@ function Series({ name, folder, primary, background }) {
             <div className="Icon-container">
                 {!hidden ?
                     imageList.map((image, index) => (
-                        <Icon key={index} src={image} alt={image.substring(14, image.indexOf("."))} />
+                        <Icon key={index} src={image} alt={image.substring(14, image.indexOf("."))} color={primary} />
                     )) : null
                 }
                 {!hidden ?
-                    <Icon color={primary} alt={"Smiski Secret"} /> : null
+                    <Icon alt={"Smiski Secret"} color={primary} /> : null
                 }
             </div>
         </div>
