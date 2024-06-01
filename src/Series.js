@@ -3,9 +3,14 @@ import Icon from './Icon.js';
 import { useState, useEffect } from 'react';
 
 function Series({ name, folder, primary, background }) {
+    const touchscreen = ('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0);
+
     const [hidden, setHidden] = useState(() => {
         const localStorageValue = localStorage.getItem(`${folder}_hidden`);
-        return localStorageValue ? JSON.parse(localStorageValue) : false;
+        return localStorageValue ?
+            JSON.parse(localStorageValue) : (touchscreen ? true : false);
     });
     
     useEffect(() => {
@@ -36,7 +41,7 @@ function Series({ name, folder, primary, background }) {
             <div className="Icon-container" style={hidden ? {margin: 0} : null}>
                 {!hidden ?
                     imageList.map((image, index) => (
-                        <Icon key={index} src={image} alt={image.substring(14, image.indexOf("."))} color={primary} />
+                        <Icon key={index} src={image} alt={image.substring(21, image.indexOf("."))} color={primary} />
                     )) : null
                 }
                 {!hidden ?

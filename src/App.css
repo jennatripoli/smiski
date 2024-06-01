@@ -1,12 +1,18 @@
 @media screen and (max-width: 750px) {
+  .Series-title:hover {
+    transform: none !important;
+  }
   .Icon-container {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
+  }
+  .Icon {
+    width: 22% !important;
   }
   .Icon-image, .Icon-image-selected {
     font-size: 12vw !important;
   }
-  .Icon {
-    width: 22% !important;
+  .Icon-image:hover {
+    transform: none !important;
   }
 }
 
@@ -107,4 +113,9 @@
   color: #606060;
   font-weight: bold;
   font-size: medium;
+}
+
+.Footer {
+  color: #606060;
+  margin: 3em 0em 1em 0em;
 }

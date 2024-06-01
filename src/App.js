@@ -23,6 +23,7 @@ function App() {
       <Series name="Dressing" folder="dressing" primary={"#f5a100"} background={"rgb(245, 161, 0, 0.5)"} />
       <Series name="Exercising" folder="exercising" primary={"#e15e76"} background={"rgb(225, 94, 118, 0.5)"} />
       <Series name="Moving" folder="moving" primary={"#e40012"} background={"rgb(228, 0, 18, 0.5)"} />
+      <footer className="Footer">All media retrieved from and belongs to <a href="https://smiski.com/">Smiski</a>.</footer>
     </div>
   );
 }
