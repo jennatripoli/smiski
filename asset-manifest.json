@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/smiski/static/css/main.266a430b.css",
-    "main.js": "/smiski/static/js/main.2bf3e24e.js",
+    "main.js": "/smiski/static/js/main.32e884a7.js",
     "static/js/453.791e6bfe.chunk.js": "/smiski/static/js/453.791e6bfe.chunk.js",
     "static/media/Smiski Balancing Boxes.png": "/smiski/static/media/Smiski Balancing Boxes.056518ea5b1664b2f27b.png",
     "static/media/Green Thumb Smiski.png": "/smiski/static/media/Green Thumb Smiski.0f73e13e0cc923467de2.png",
@@ -19,16 +19,22 @@
     "static/media/Smiski Cheering.png": "/smiski/static/media/Smiski Cheering.3f2fb44550ad7a8c4ecd.png",
     "static/media/Smiski Researching.png": "/smiski/static/media/Smiski Researching.97917b5ad9ed7a1f731e.png",
     "static/media/Smiski Approving.png": "/smiski/static/media/Smiski Approving.d6a47d97ca077fc8ef5f.png",
+    "static/media/Smiski Skateboarding.png": "/smiski/static/media/Smiski Skateboarding.8bb7c4ea4002853b7c67.png",
     "static/media/Smiski Lotus Pose.png": "/smiski/static/media/Smiski Lotus Pose.c36de8748cd24156dc77.png",
     "static/media/Smiski Ship Pose.png": "/smiski/static/media/Smiski Ship Pose.ea06c5826da8dde6d062.png",
     "static/media/Smiski Good Idea.png": "/smiski/static/media/Smiski Good Idea.b1701d936df6ec3f05ca.png",
     "static/media/Smiski Dancing.png": "/smiski/static/media/Smiski Dancing.69805263f36dd6e65c04.png",
+    "static/media/Smiski Blowing Bubbles.png": "/smiski/static/media/Smiski Blowing Bubbles.0280b55ec68ba15df4ec.png",
     "static/media/Smiski On Your Side.png": "/smiski/static/media/Smiski On Your Side.ee99e0399aaa0e785f2a.png",
     "static/media/Smiski Tree Pose.png": "/smiski/static/media/Smiski Tree Pose.1bcedc8b0a5c0b0179a8.png",
     "static/media/Smiski Putting On Socks.png": "/smiski/static/media/Smiski Putting On Socks.a0155d2b74fec0088c8d.png",
+    "static/media/Smiski Sing-Along.png": "/smiski/static/media/Smiski Sing-Along.4484b65d49d70b4b1746.png",
+    "static/media/Smiski Paper Airplane.png": "/smiski/static/media/Smiski Paper Airplane.1df85acab91562dc81ca.png",
     "static/media/Smiski Fuzin & Raijin.png": "/smiski/static/media/Smiski Fuzin & Raijin.0d881910d9d4fa969e59.png",
     "static/media/Smiski Marching.png": "/smiski/static/media/Smiski Marching.33d8d71a707c89653436.png",
     "static/media/Smiski On Drums.png": "/smiski/static/media/Smiski On Drums.56abe781f023cd1d8b27.png",
+    "static/media/Smiski Sunbathing.png": "/smiski/static/media/Smiski Sunbathing.04bd9cd23b6c3a892a2e.png",
+    "static/media/Smiski Gardening.png": "/smiski/static/media/Smiski Gardening.43f3b81085a43c407a61.png",
     "static/media/Smiski Struggling.png": "/smiski/static/media/Smiski Struggling.daf2c7f384cdad3c0a1b.png",
     "static/media/Smiski Hoop.png": "/smiski/static/media/Smiski Hoop.5603a85fe91309e13cd3.png",
     "static/media/Smiski Sweater.png": "/smiski/static/media/Smiski Sweater.61d82190294fa04147f9.png",
@@ -90,11 +96,11 @@
     "static/media/top_logo.png": "/smiski/static/media/top_logo.e475ad2d16ddcc34569e.png",
     "index.html": "/smiski/index.html",
     "main.266a430b.css.map": "/smiski/static/css/main.266a430b.css.map",
-    "main.2bf3e24e.js.map": "/smiski/static/js/main.2bf3e24e.js.map",
+    "main.32e884a7.js.map": "/smiski/static/js/main.32e884a7.js.map",
     "453.791e6bfe.chunk.js.map": "/smiski/static/js/453.791e6bfe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.266a430b.css",
-    "static/js/main.2bf3e24e.js"
+    "static/js/main.32e884a7.js"
   ]
 }
