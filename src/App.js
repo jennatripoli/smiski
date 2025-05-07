@@ -102,6 +102,12 @@ function App() {
         primary={"#e40012"}
         background={"rgb(228, 0, 18, 0.5)"}
       />
+      <Series
+        name="Sunday"
+        folder="sunday"
+        primary={"#c94d97"}
+        background={"rgb(201, 77, 151, 0.5)"}
+      />
       <footer className="Footer">
         All media retrieved from and belongs to{" "}
         <a href="https://smiski.com/">Smiski</a>.
