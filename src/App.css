@@ -4,6 +4,7 @@
   }
   .Icon-container {
     flex-wrap: wrap !important;
+    gap: 0.2em;
   }
   .Icon {
     width: 22% !important;
@@ -117,7 +118,7 @@
 .Icon-title {
   color: #606060;
   font-weight: bold;
-  font-size: medium;
+  font-size: small;
 }
 
 .Footer {
