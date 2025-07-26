@@ -52,7 +52,7 @@ function StatisticCard({ title, value, icon }: StatisticCardProps) {
       <CardContent>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <div className="bg-primary/10 p-1 rounded-full">{icon}</div>
+          <div className="bg-muted p-1 rounded-full">{icon}</div>
         </div>
         <h3 className="text-2xl font-bold">{value}</h3>
       </CardContent>

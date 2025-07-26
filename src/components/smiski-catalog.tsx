@@ -49,7 +49,7 @@ export function SmiskiCatalog() {
               value="ALL"
               className="px-3 py-2 text-xs sm:text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
             >
-              ALL ⋆⭒˚｡⋆
+              ALL ♡
             </TabsTrigger>
             {allSeries.map((series) => (
               <TabsTrigger

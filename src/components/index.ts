@@ -6,3 +6,4 @@ export * from "./smiski-app";
 export * from "./smiski-catalog";
 export * from "./sync-banner";
 export * from "./user-menu";
+export * from "./theme-toggle";
