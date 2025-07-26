@@ -106,11 +106,8 @@ export function SmiskiCatalog() {
                           }
                         >
                           <div className="w-full h-full rounded-md overflow-clip">
-                            <Image
-                              src={
-                                `/smiskis/${smiski.series}/${smiski.name}.png` ||
-                                "/placeholder.svg"
-                              }
+                            {/* <Image
+                              src={`/smiskis/${smiski.series}/${smiski.name}.png`}
                               alt={smiski.name}
                               width={200}
                               height={200}
@@ -122,7 +119,7 @@ export function SmiskiCatalog() {
                                 const target = e.target as HTMLImageElement;
                                 target.src = `/placeholder.svg?height=200&width=200&query=cute smiski figurine ${smiski.name}`;
                               }}
-                            />
+                            /> */}
                           </div>
                         </div>
 
