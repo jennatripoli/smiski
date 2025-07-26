@@ -118,7 +118,7 @@ export function SmiskiCatalog() {
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.onerror = null;
-                                target.src = "/placeholder.svg";
+                                target.src = "/placeholder.png";
                               }}
                             />
                           </div>
