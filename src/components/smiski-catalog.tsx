@@ -106,7 +106,7 @@ export function SmiskiCatalog() {
                           }
                         >
                           <div className="w-full h-full rounded-md overflow-clip">
-                            {/* <Image
+                            <Image
                               src={`/smiskis/${smiski.series}/${smiski.name}.png`}
                               alt={smiski.name}
                               width={200}
@@ -117,9 +117,10 @@ export function SmiskiCatalog() {
                               )}
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
-                                target.src = `/placeholder.svg?height=200&width=200&query=cute smiski figurine ${smiski.name}`;
+                                target.onerror = null;
+                                target.src = "/placeholder.svg";
                               }}
-                            /> */}
+                            />
                           </div>
                         </div>
 
