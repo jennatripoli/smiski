@@ -107,7 +107,7 @@ export function SmiskiCatalog() {
                         >
                           <div className="w-full h-full rounded-md overflow-clip">
                             <Image
-                              src={`/smiskis/${smiski.series}/${smiski.name}.png`}
+                              src={`/smiski/smiskis/${smiski.series}/${smiski.name}.png`}
                               alt={smiski.name}
                               width={200}
                               height={200}
@@ -118,7 +118,7 @@ export function SmiskiCatalog() {
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.onerror = null;
-                                target.src = "/placeholder.png";
+                                target.src = "/smiski/placeholder.png";
                               }}
                             />
                           </div>
