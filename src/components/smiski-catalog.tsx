@@ -103,6 +103,7 @@ export function SmiskiCatalog() {
             <Switch checked={showSecrets} onCheckedChange={setShowSecrets} />
             <p className="text-sm">Show secrets</p>
           </div>
+          <div className="flex items-center gap-2">
             <Switch
               checked={showDiscontinued}
               onCheckedChange={setShowDiscontinued}
