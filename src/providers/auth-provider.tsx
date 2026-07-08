@@ -1,7 +1,8 @@
 "use client";
 
+import type { AuthError, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
-import type { User, AuthError } from "@supabase/supabase-js";
+
 import { supabase } from "@/lib";
 
 type AuthContextType = {
@@ -9,11 +10,11 @@ type AuthContextType = {
   loading: boolean;
   signIn: (
     email: string,
-    password: string
+    password: string,
   ) => Promise<{ error: AuthError | null }>;
   signUp: (
     email: string,
-    password: string
+    password: string,
   ) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
 };

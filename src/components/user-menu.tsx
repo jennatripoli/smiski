@@ -1,20 +1,21 @@
 "use client";
 
+import { LogOut } from "lucide-react";
 import { useState } from "react";
+
 import {
-  Button,
+  AuthModal,
   Avatar,
   AvatarFallback,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  AuthModal,
   ThemeToggle,
 } from "@/components";
 import { useAuth } from "@/providers";
-import { LogOut } from "lucide-react";
 
 export function UserMenu() {
   const { user, signOut } = useAuth();

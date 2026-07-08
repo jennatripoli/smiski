@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { SmiskiApp, LoadingSkeleton, UserMenu } from "@/components";
+
+import { LoadingSkeleton, SmiskiApp, UserMenu } from "@/components";
 import { AuthProvider, SmiskiProvider, ThemeProvider } from "@/providers";
 
 export default function Home() {

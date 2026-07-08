@@ -1,21 +1,22 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
+
 import {
   Button,
-  Input,
-  Label,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
+  Input,
+  Label,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components";
 import { useAuth } from "@/providers";
-import { Loader2 } from "lucide-react";
 
 type Props = {
   open: boolean;

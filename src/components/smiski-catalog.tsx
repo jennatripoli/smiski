@@ -1,19 +1,20 @@
 "use client";
 
+import { Gem, Minus, Plus } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+
 import {
+  Badge,
   Button,
+  Switch,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-  Badge,
-  Switch,
 } from "@/components";
-import { Plus, Minus, Gem } from "lucide-react";
-import { cn, SMISKI_DATA, SERIES_COLORS } from "@/lib";
+import { cn, SERIES_COLORS, SMISKI_DATA } from "@/lib";
 import { useSmiski } from "@/providers";
-import Image from "next/image";
 
 export function SmiskiCatalog() {
   const { smiskis, addSmiski, incrementCount, decrementCount } = useSmiski();
@@ -120,17 +121,25 @@ export function SmiskiCatalog() {
                 ? visibleSeries.flatMap((s) =>
                     SMISKI_DATA[s]
                       .filter((smiski) => showSecrets || !smiski.isSecret)
-                      .map((smiski) => ({ ...smiski, series: s, isISO: false }))
+                      .map((smiski) => ({
+                        ...smiski,
+                        series: s,
+                        isISO: false,
+                      })),
                   )
                 : showSecrets && series === "SECRETS"
-                ? visibleSeries.flatMap((s) =>
-                    SMISKI_DATA[s]
-                      .filter((smiski) => smiski.isSecret)
-                      .map((smiski) => ({ ...smiski, series: s, isISO: false }))
-                  )
-                : SMISKI_DATA[series]
-                    .filter((smiski) => showSecrets || !smiski.isSecret)
-                    .map((smiski) => ({ ...smiski, series, isISO: false }));
+                  ? visibleSeries.flatMap((s) =>
+                      SMISKI_DATA[s]
+                        .filter((smiski) => smiski.isSecret)
+                        .map((smiski) => ({
+                          ...smiski,
+                          series: s,
+                          isISO: false,
+                        })),
+                    )
+                  : SMISKI_DATA[series]
+                      .filter((smiski) => showSecrets || !smiski.isSecret)
+                      .map((smiski) => ({ ...smiski, series, isISO: false }));
 
             return (
               <TabsContent key={series} value={series} className="mt-4">
@@ -138,7 +147,7 @@ export function SmiskiCatalog() {
                   {smiskisToRender.map((smiski) => {
                     const collectionSmiski = getSmiskiFromCollection(
                       smiski.name,
-                      smiski.series
+                      smiski.series,
                     );
                     const count = collectionSmiski?.count || 0;
                     const seriesColor =
@@ -152,7 +161,7 @@ export function SmiskiCatalog() {
                         <div
                           className={cn(
                             "aspect-square rounded-md shadow-md transition-all",
-                            seriesColor
+                            seriesColor,
                           )}
                         >
                           <div
@@ -162,7 +171,7 @@ export function SmiskiCatalog() {
                               handleAddSmiski(
                                 smiski.name,
                                 smiski.series,
-                                smiski.isSecret
+                                smiski.isSecret,
                               )
                             }
                           >
@@ -174,7 +183,7 @@ export function SmiskiCatalog() {
                                 height={200}
                                 className={cn(
                                   "object-cover h-full w-full transition-all duration-150",
-                                  count === 0 && "opacity-50"
+                                  count === 0 && "opacity-50",
                                 )}
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
@@ -185,13 +194,13 @@ export function SmiskiCatalog() {
                             </div>
                           </div>
 
-                        {smiski.isSecret && (
-                          <div className="absolute top-2 right-2">
-                            <div className="bg-primary rounded-md p-1">
-                              <Gem className="h-4 w-4 text-primary-foreground" />
+                          {smiski.isSecret && (
+                            <div className="absolute top-2 right-2">
+                              <div className="bg-primary rounded-md p-1">
+                                <Gem className="h-4 w-4 text-primary-foreground" />
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
                           {count > 0 && (
                             <Badge
@@ -216,7 +225,7 @@ export function SmiskiCatalog() {
                                   onClick={() =>
                                     handleRemoveSmiski(
                                       smiski.name,
-                                      smiski.series
+                                      smiski.series,
                                     )
                                   }
                                   title="Remove one"
@@ -232,7 +241,7 @@ export function SmiskiCatalog() {
                                   handleAddSmiski(
                                     smiski.name,
                                     smiski.series,
-                                    smiski.isSecret
+                                    smiski.isSecret,
                                   )
                                 }
                                 title={

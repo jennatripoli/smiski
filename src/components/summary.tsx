@@ -1,8 +1,9 @@
 "use client";
 
-import { Card, CardContent } from "@/components";
 import { Check, Star, X } from "lucide-react";
 import { ReactNode } from "react";
+
+import { Card, CardContent } from "@/components";
 import { SMISKI_DATA } from "@/lib";
 
 type Props = {
@@ -14,7 +15,7 @@ export function Summary({ total, unique }: Props) {
   // Calculate total possible Smiskis from all series
   const all = Object.values(SMISKI_DATA).reduce(
     (total, series) => total + series.length,
-    0
+    0,
   );
 
   const missing = all - unique;

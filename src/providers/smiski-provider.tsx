@@ -2,14 +2,15 @@
 
 import {
   createContext,
+  ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
-  useCallback,
-  ReactNode,
 } from "react";
+
+import { SERIES_COLORS, Smiski, supabase } from "@/lib";
 import { useAuth } from "@/providers";
-import { supabase, SERIES_COLORS, Smiski } from "@/lib";
 
 type SmiskiContext = {
   smiskis: Smiski[];
@@ -101,7 +102,7 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
         const existingIndex = mergedData.findIndex(
           (cloudSmiski) =>
             cloudSmiski.name === localSmiski.name &&
-            cloudSmiski.series === localSmiski.series
+            cloudSmiski.series === localSmiski.series,
         );
 
         if (existingIndex >= 0) {
@@ -183,9 +184,7 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
   // Load view mode from localStorage
   useEffect(() => {
     const savedViewMode = localStorage.getItem("viewMode") as
-      | "grid"
-      | "list"
-      | null;
+      "grid" | "list" | null;
     if (savedViewMode) {
       setViewMode(savedViewMode);
     }
@@ -229,7 +228,7 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
 
         // Update the local smiski with the cloud ID
         const updatedWithCloudId = updatedSmiskis.map((s) =>
-          s.id === newSmiski.id ? { ...s, id: data.id } : s
+          s.id === newSmiski.id ? { ...s, id: data.id } : s,
         );
         setSmiskis(updatedWithCloudId);
         saveToLocalStorage(updatedWithCloudId);
@@ -244,7 +243,7 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
     if (!smiski) return;
 
     const updatedSmiskis = smiskis.map((s) =>
-      s.id === id ? { ...s, count: s.count + 1 } : s
+      s.id === id ? { ...s, count: s.count + 1 } : s,
     );
     setSmiskis(updatedSmiskis);
     saveToLocalStorage(updatedSmiskis);
@@ -278,7 +277,7 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
       await removeSmiski(id);
     } else {
       const updatedSmiskis = smiskis.map((s) =>
-        s.id === id ? { ...s, count: newCount } : s
+        s.id === id ? { ...s, count: newCount } : s,
       );
       setSmiskis(updatedSmiskis);
       saveToLocalStorage(updatedSmiskis);
