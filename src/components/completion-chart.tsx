@@ -37,7 +37,7 @@ export function CompletionChart({
 
   return (
     <Card>
-      <CardContent className="flex flex-col sm:flex-row gap-x-6 gap-y-2.5 items-center">
+      <CardContent className="flex flex-col sm:flex-row gap-x-6 gap-y-4 pt-2 items-center">
         <div className="flex flex-row sm:flex-col items-center gap-3 shrink-0">
           <div className="relative">
             <svg
