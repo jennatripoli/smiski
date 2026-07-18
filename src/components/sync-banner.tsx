@@ -15,9 +15,9 @@ export function SyncBanner() {
   return (
     <Card>
       <CardContent>
-        <div className="flex items-center gap-3 p-1">
+        <div className="flex items-center gap-3 p-1 pt-0">
           <CloudOff className="size-5" />
-          <p className="font-semibold leading-0">
+          <p className="font-semibold">
             Sign in to save your collection and access it later.
           </p>
         </div>
