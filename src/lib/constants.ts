@@ -159,6 +159,15 @@ export const SMISKI_DATA: SmiskiSeries = {
     { name: "Tasting", isSecret: false },
     { name: "Candle", isSecret: true },
   ],
+  Construction: [
+    { name: "Digging a Hole", isSecret: false },
+    { name: "Crushing Rock", isSecret: false },
+    { name: "Tightening Bolt", isSecret: false },
+    { name: "Measuring", isSecret: false },
+    { name: "Directing Traffic", isSecret: false },
+    { name: "Loosening Bolt", isSecret: false },
+    { name: "Roadblock", isSecret: true },
+  ],
   Hippers: [
     { name: "Smartphone", isSecret: false },
     { name: "Climbing", isSecret: false },
@@ -188,5 +197,6 @@ export const SERIES_COLORS: Record<string, string> = {
   Moving: "bg-[#e40012]/50 border-[#e40012]",
   Sunday: "bg-[#c94d97]/50 border-[#c94d97]",
   Birthday: "bg-[#e97cab]/50 border-[#e97cab]",
+  Construction: "bg-[#9c4e00]/50 border-[#9c4e00]",
   Hippers: "bg-[#ffd700]/30 border-[#ffd700]/80",
 };
