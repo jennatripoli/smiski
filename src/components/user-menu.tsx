@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut } from "lucide-react";
+import { LogOut, UserIcon } from "lucide-react";
 import { useState } from "react";
 
 import {
@@ -26,7 +26,12 @@ export function UserMenu() {
       <>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button onClick={() => setAuthModalOpen(true)}>Sign In</Button>
+          <Button
+            className="rounded-full size-8"
+            onClick={() => setAuthModalOpen(true)}
+          >
+            <UserIcon />
+          </Button>
         </div>
         <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} />
       </>
