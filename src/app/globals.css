@@ -55,7 +55,7 @@
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
+  --muted: oklch(0.928 0.006 264.531);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
@@ -89,7 +89,7 @@
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: oklch(0.34 0.006 286.033);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
@@ -118,5 +118,107 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .series-series-1 {
+    background-color: rgb(120 195 40 / 0.5);
+    border-color: #78c328;
+  }
+
+  .series-series-2 {
+    background-color: rgb(238 126 0 / 0.5);
+    border-color: #ee7e00;
+  }
+
+  .series-series-3 {
+    background-color: rgb(139 101 195 / 0.5);
+    border-color: #8b65c3;
+  }
+
+  .series-series-4 {
+    background-color: rgb(218 75 142 / 0.5);
+    border-color: #da4b8e;
+  }
+
+  .series-toilet {
+    background-color: rgb(82 183 130 / 0.5);
+    border-color: #52b782;
+  }
+
+  .series-bath {
+    background-color: rgb(32 184 197 / 0.5);
+    border-color: #20b8c5;
+  }
+
+  .series-living {
+    background-color: rgb(240 141 116 / 0.5);
+    border-color: #f08d74;
+  }
+
+  .series-bed {
+    background-color: rgb(104 121 186 / 0.5);
+    border-color: #6879ba;
+  }
+
+  .series-yoga {
+    background-color: rgb(255 102 51 / 0.5);
+    border-color: #ff6633;
+  }
+
+  .series-cheer {
+    background-color: rgb(234 90 148 / 0.5);
+    border-color: #ea5a94;
+  }
+
+  .series-museum {
+    background-color: rgb(228 0 18 / 0.5);
+    border-color: #e40012;
+  }
+
+  .series-at-work {
+    background-color: rgb(0 161 67 / 0.5);
+    border-color: #00a143;
+  }
+
+  .series-dressing {
+    background-color: rgb(245 161 0 / 0.5);
+    border-color: #f5a100;
+  }
+
+  .series-exercising {
+    background-color: rgb(225 94 118 / 0.5);
+    border-color: #e15e76;
+  }
+
+  .series-moving {
+    background-color: rgb(228 0 18 / 0.5);
+    border-color: #e40012;
+  }
+
+  .series-sunday {
+    background-color: rgb(201 77 151 / 0.5);
+    border-color: #c94d97;
+  }
+
+  .series-birthday {
+    background-color: rgb(233 124 171 / 0.5);
+    border-color: #e97cab;
+  }
+
+  .series-construction {
+    background-color: rgb(156 78 0 / 0.5);
+    border-color: #9c4e00;
+  }
+
+  .series-hippers {
+    background-color: rgb(255 215 0 / 0.3);
+    border-color: rgb(255 215 0 / 0.8);
+  }
+
+  .series-custom {
+    background-color: var(--muted);
+    border-color: var(--border);
   }
 }

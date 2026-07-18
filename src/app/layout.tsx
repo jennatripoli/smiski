@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Smiski Tracker",
   description: "Document your Smiski collection",
+  icons: {
+    icon: "/smiski/icon.png",
+  },
 };
 
 export default function RootLayout({

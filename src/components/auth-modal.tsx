@@ -28,15 +28,18 @@ export function AuthModal({ open, onOpenChange }: Props) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signInError, setSignInError] = useState<string | null>(null);
+  const [signUpError, setSignUpError] = useState<string | null>(null);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSignInError(null);
 
     const { error } = await signIn(email, password);
 
     if (error) {
-      console.error("Sign In Failed", error);
+      setSignInError(error.message);
     } else {
       onOpenChange(false);
       setEmail("");
@@ -49,11 +52,12 @@ export function AuthModal({ open, onOpenChange }: Props) {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setSignUpError(null);
 
     const { error } = await signUp(email, password);
 
     if (error) {
-      console.error("Sign Up Failed", error);
+      setSignUpError(error.message);
     } else {
       onOpenChange(false);
       setEmail("");
@@ -111,6 +115,9 @@ export function AuthModal({ open, onOpenChange }: Props) {
                   required
                 />
               </div>
+              {signInError && (
+                <p className="text-sm text-destructive">{signInError}</p>
+              )}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Sign In
@@ -142,6 +149,9 @@ export function AuthModal({ open, onOpenChange }: Props) {
                   required
                 />
               </div>
+              {signUpError && (
+                <p className="text-sm text-destructive">{signUpError}</p>
+              )}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create Account

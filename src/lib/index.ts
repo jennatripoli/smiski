@@ -1,3 +1,4 @@
+export * from "./completion";
 export * from "./constants";
 export * from "./supabase";
 export * from "./types";

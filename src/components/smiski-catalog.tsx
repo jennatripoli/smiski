@@ -1,51 +1,44 @@
 "use client";
 
-import { Gem, Minus, Plus } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import {
-  Badge,
-  Button,
-  Switch,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components";
-import { cn, SERIES_COLORS, SMISKI_DATA } from "@/lib";
+import { CatalogFilter, CatalogToolbar, SmiskiTile } from "@/components";
+import { DISCONTINUED_SERIES, SMISKI_DATA } from "@/lib";
 import { useSmiski } from "@/providers";
 
-export function SmiskiCatalog() {
+type Props = {
+  selectedSeries: string;
+  includeSecrets: boolean;
+  includeDiscontinued: boolean;
+};
+
+export function SmiskiCatalog({
+  selectedSeries,
+  includeSecrets,
+  includeDiscontinued,
+}: Props) {
   const { smiskis, addSmiski, incrementCount, decrementCount } = useSmiski();
-  const [selectedSeries, setSelectedSeries] = useState("ALL");
-  const [showSecrets, setShowSecrets] = useState(true);
-  const [showDiscontinued, setShowDiscontinued] = useState(true);
+  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>("all");
 
-  const allSeries = Object.keys(SMISKI_DATA);
+  const allSeries = useMemo(() => Object.keys(SMISKI_DATA), []);
 
-  const DISCONTINUED_SERIES = ["Series 2", "Series 3", "Series 4"];
-
-  const visibleSeries = showDiscontinued
-    ? allSeries
-    : allSeries.filter((s) => !DISCONTINUED_SERIES.includes(s));
+  const visibleSeries = useMemo(
+    () =>
+      includeDiscontinued
+        ? allSeries
+        : allSeries.filter((s) => !DISCONTINUED_SERIES.includes(s)),
+    [allSeries, includeDiscontinued],
+  );
 
   useEffect(() => {
-    const savedShowSecrets = sessionStorage.getItem("showSecrets");
-    if (savedShowSecrets) setShowSecrets(savedShowSecrets === "true");
-
-    const savedShowDiscontinued = sessionStorage.getItem("showDiscontinued");
-    if (savedShowDiscontinued)
-      setShowDiscontinued(savedShowDiscontinued === "true");
+    const savedCatalogFilter = sessionStorage.getItem("catalogFilter");
+    if (savedCatalogFilter)
+      setCatalogFilter(savedCatalogFilter as CatalogFilter);
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem("showSecrets", showSecrets.toString());
-  }, [showSecrets]);
-
-  useEffect(() => {
-    sessionStorage.setItem("showDiscontinued", showDiscontinued.toString());
-  }, [showDiscontinued]);
+    sessionStorage.setItem("catalogFilter", catalogFilter);
+  }, [catalogFilter]);
 
   // Get Smiski from collection if it exists
   const getSmiskiFromCollection = (name: string, series: string) => {
@@ -65,195 +58,80 @@ export function SmiskiCatalog() {
     if (existingSmiski) decrementCount(existingSmiski.id);
   };
 
+  const visibleFigures = useMemo(() => {
+    // Base figures scoped by the selected series, unfiltered by
+    // include-discontinued/secrets so the "Secrets"/"Discontinued" filters
+    // can still surface them on request.
+    const baseSeries =
+      selectedSeries === "ALL"
+        ? catalogFilter === "discontinued"
+          ? allSeries
+          : visibleSeries
+        : [selectedSeries];
+
+    const figures = baseSeries.flatMap((s) =>
+      (SMISKI_DATA[s] ?? []).map((f) => ({ ...f, series: s })),
+    );
+
+    return figures.filter((figure) => {
+      if (catalogFilter === "secrets") return figure.isSecret;
+      if (catalogFilter === "discontinued")
+        return DISCONTINUED_SERIES.includes(figure.series);
+
+      if (!includeSecrets && figure.isSecret) return false;
+
+      const collected = smiskis.find(
+        (s) => s.name === figure.name && s.series === figure.series,
+      );
+      const count = collected?.count ?? 0;
+
+      if (catalogFilter === "owned" && count === 0) return false;
+      if (catalogFilter === "missing" && count > 0) return false;
+
+      return true;
+    });
+  }, [
+    selectedSeries,
+    allSeries,
+    visibleSeries,
+    catalogFilter,
+    includeSecrets,
+    smiskis,
+  ]);
+
   return (
     <div className="space-y-4">
-      <Tabs defaultValue={selectedSeries} onValueChange={setSelectedSeries}>
-        <div className="w-full">
-          <TabsList className="h-auto p-1 flex flex-wrap justify-start gap-1 bg-muted">
-            <TabsTrigger
-              key="ALL"
-              value="ALL"
-              className="px-3 py-2 text-xs sm:text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
-            >
-              ALL ♡
-            </TabsTrigger>
+      <CatalogToolbar
+        catalogFilter={catalogFilter}
+        onCatalogFilterChange={setCatalogFilter}
+      />
 
-            {showSecrets && (
-              <TabsTrigger
-                key="SECRETS"
-                value="SECRETS"
-                className="px-3 py-2 text-xs sm:text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
-              >
-                SECRETS ✧
-              </TabsTrigger>
-            )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {visibleFigures.map((figure) => {
+          const count =
+            getSmiskiFromCollection(figure.name, figure.series)?.count ?? 0;
 
-            {visibleSeries.map((series) => (
-              <TabsTrigger
-                key={series}
-                value={series}
-                className="px-3 py-2 text-xs sm:text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
-              >
-                {series}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </div>
-
-        <div className="flex items-center gap-6 flex-wrap">
-          <div className="flex items-center gap-2">
-            <Switch checked={showSecrets} onCheckedChange={setShowSecrets} />
-            <p className="text-sm">Show secrets</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Switch
-              checked={showDiscontinued}
-              onCheckedChange={setShowDiscontinued}
+          return (
+            <SmiskiTile
+              key={`${figure.series}-${figure.name}`}
+              name={figure.name}
+              series={figure.series}
+              isSecret={figure.isSecret}
+              count={count}
+              onAdd={() =>
+                handleAddSmiski(figure.name, figure.series, figure.isSecret)
+              }
+              onRemove={() => handleRemoveSmiski(figure.name, figure.series)}
             />
-            <p className="text-sm">Show discontinued</p>
-          </div>
-        </div>
+          );
+        })}
 
-        {["ALL", showSecrets ? "SECRETS" : null, ...visibleSeries]
-          .filter((s) => s !== null)
-          .map((series) => {
-            const smiskisToRender =
-              series === "ALL"
-                ? visibleSeries.flatMap((s) =>
-                    SMISKI_DATA[s]
-                      .filter((smiski) => showSecrets || !smiski.isSecret)
-                      .map((smiski) => ({ ...smiski, series: s })),
-                  )
-                : showSecrets && series === "SECRETS"
-                  ? visibleSeries.flatMap((s) =>
-                      SMISKI_DATA[s]
-                        .filter((smiski) => smiski.isSecret)
-                        .map((smiski) => ({ ...smiski, series: s })),
-                    )
-                  : SMISKI_DATA[series]
-                      .filter((smiski) => showSecrets || !smiski.isSecret)
-                      .map((smiski) => ({ ...smiski, series }));
-
-            return (
-              <TabsContent key={series} value={series} className="mt-4">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {smiskisToRender.map((smiski) => {
-                    const collectionSmiski = getSmiskiFromCollection(
-                      smiski.name,
-                      smiski.series,
-                    );
-                    const count = collectionSmiski?.count || 0;
-                    const seriesColor =
-                      SERIES_COLORS[smiski.series] || SERIES_COLORS["Custom"];
-
-                    return (
-                      <div
-                        key={`${smiski.series}-${smiski.name}`}
-                        className="relative group"
-                      >
-                        <div
-                          className={cn(
-                            "aspect-square rounded-md shadow-md transition-all",
-                            seriesColor,
-                          )}
-                        >
-                          <div
-                            className="absolute inset-0 flex items-center justify-center p-4"
-                            onClick={() =>
-                              count === 0 &&
-                              handleAddSmiski(
-                                smiski.name,
-                                smiski.series,
-                                smiski.isSecret,
-                              )
-                            }
-                          >
-                            <div className="w-full h-full rounded-md overflow-clip">
-                              <Image
-                                src={`/smiski/smiskis/${smiski.series}/${smiski.name}.png`}
-                                alt={smiski.name}
-                                width={200}
-                                height={200}
-                                className={cn(
-                                  "object-cover h-full w-full transition-all duration-150",
-                                  count === 0 && "opacity-50",
-                                )}
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.onerror = null;
-                                  target.src = "/smiski/placeholder.png";
-                                }}
-                              />
-                            </div>
-                          </div>
-
-                          {smiski.isSecret && (
-                            <div className="absolute top-2 right-2">
-                              <div className="bg-primary rounded-md p-1">
-                                <Gem className="h-4 w-4 text-primary-foreground" />
-                              </div>
-                            </div>
-                          )}
-
-                          {count > 0 && (
-                            <Badge
-                              variant="default"
-                              className="absolute top-2 left-2 bg-primary text-primary-foreground font-bold min-w-6 h-6 flex items-center justify-center"
-                            >
-                              {count}
-                            </Badge>
-                          )}
-
-                          <div className="absolute inset-x-0 bottom-0 bg-background/80 backdrop-blur-sm p-2 flex flex-row justify-between items-center gap-2 rounded-b-md">
-                            <p className="text-sm font-medium truncate">
-                              {smiski.name}
-                            </p>
-
-                            <div className="flex gap-1">
-                              {count > 0 && (
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className="size-6"
-                                  onClick={() =>
-                                    handleRemoveSmiski(
-                                      smiski.name,
-                                      smiski.series,
-                                    )
-                                  }
-                                  title="Remove one"
-                                >
-                                  <Minus />
-                                </Button>
-                              )}
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                className="size-6"
-                                onClick={() =>
-                                  handleAddSmiski(
-                                    smiski.name,
-                                    smiski.series,
-                                    smiski.isSecret,
-                                  )
-                                }
-                                title={
-                                  count > 0 ? "Add one" : "Add to collection"
-                                }
-                              >
-                                <Plus />
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </TabsContent>
-            );
-          })}
-      </Tabs>
+        {visibleFigures.length === 0 && (
+          <p className="col-span-full text-center text-sm text-muted-foreground py-8">
+            No figures match your filters.
+          </p>
+        )}
+      </div>
     </div>
   );
 }
