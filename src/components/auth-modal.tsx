@@ -38,7 +38,6 @@ export function AuthModal({ open, onOpenChange }: Props) {
     if (error) {
       console.error("Sign In Failed", error);
     } else {
-      console.log("Welcome back!");
       onOpenChange(false);
       setEmail("");
       setPassword("");
@@ -56,7 +55,6 @@ export function AuthModal({ open, onOpenChange }: Props) {
     if (error) {
       console.error("Sign Up Failed", error);
     } else {
-      console.log("Account Created!");
       onOpenChange(false);
       setEmail("");
       setPassword("");

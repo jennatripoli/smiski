@@ -31,11 +31,12 @@ export function SmiskiCatalog() {
     : allSeries.filter((s) => !DISCONTINUED_SERIES.includes(s));
 
   useEffect(() => {
-    const showSecrets = sessionStorage.getItem("showSecrets");
-    if (showSecrets) setShowSecrets(showSecrets === "true");
+    const savedShowSecrets = sessionStorage.getItem("showSecrets");
+    if (savedShowSecrets) setShowSecrets(savedShowSecrets === "true");
 
-    const showDiscontinued = sessionStorage.getItem("showDiscontinued");
-    if (showDiscontinued) setShowDiscontinued(showDiscontinued === "true");
+    const savedShowDiscontinued = sessionStorage.getItem("showDiscontinued");
+    if (savedShowDiscontinued)
+      setShowDiscontinued(savedShowDiscontinued === "true");
   }, []);
 
   useEffect(() => {
@@ -121,25 +122,17 @@ export function SmiskiCatalog() {
                 ? visibleSeries.flatMap((s) =>
                     SMISKI_DATA[s]
                       .filter((smiski) => showSecrets || !smiski.isSecret)
-                      .map((smiski) => ({
-                        ...smiski,
-                        series: s,
-                        isISO: false,
-                      })),
+                      .map((smiski) => ({ ...smiski, series: s })),
                   )
                 : showSecrets && series === "SECRETS"
                   ? visibleSeries.flatMap((s) =>
                       SMISKI_DATA[s]
                         .filter((smiski) => smiski.isSecret)
-                        .map((smiski) => ({
-                          ...smiski,
-                          series: s,
-                          isISO: false,
-                        })),
+                        .map((smiski) => ({ ...smiski, series: s })),
                     )
                   : SMISKI_DATA[series]
                       .filter((smiski) => showSecrets || !smiski.isSecret)
-                      .map((smiski) => ({ ...smiski, series, isISO: false }));
+                      .map((smiski) => ({ ...smiski, series }));
 
             return (
               <TabsContent key={series} value={series} className="mt-4">

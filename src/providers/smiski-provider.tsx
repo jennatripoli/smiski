@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 
-import { SERIES_COLORS, Smiski, supabase } from "@/lib";
+import { Smiski, supabase } from "@/lib";
 import { useAuth } from "@/providers";
 
 type SmiskiContext = {
@@ -18,14 +18,7 @@ type SmiskiContext = {
   incrementCount: (id: string) => void;
   decrementCount: (id: string) => void;
   removeSmiski: (id: string) => void;
-  toggleFilterMissing: () => void;
-  setFilterSeries: (series: string | null) => void;
-  setViewMode: (mode: "grid" | "list") => void;
-  getSeriesColor: (series: string) => string;
   syncWithCloud: () => Promise<void>;
-  filterMissing: boolean;
-  filterSeries: string | null;
-  viewMode: "grid" | "list";
   loading: boolean;
 };
 
@@ -35,9 +28,6 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
 
   const [smiskis, setSmiskis] = useState<Smiski[]>([]);
-  const [filterMissing, setFilterMissing] = useState(false);
-  const [filterSeries, setFilterSeries] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [loading, setLoading] = useState(false);
 
   // Generate a unique ID for new Smiskis
@@ -181,23 +171,6 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
     loadCollection();
   }, [user, loadFromSupabase]);
 
-  // Load view mode from localStorage
-  useEffect(() => {
-    const savedViewMode = localStorage.getItem("viewMode") as
-      "grid" | "list" | null;
-    if (savedViewMode) {
-      setViewMode(savedViewMode);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("viewMode", viewMode);
-  }, [viewMode]);
-
-  const getSeriesColor = (series: string) => {
-    return SERIES_COLORS[series] || SERIES_COLORS["Custom"];
-  };
-
   const addSmiski = async (smiski: Omit<Smiski, "id" | "count">) => {
     const newSmiski: Smiski = {
       id: generateId(),
@@ -317,11 +290,6 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const toggleFilterMissing = () => {
-    setFilterMissing((prev) => !prev);
-  };
-
-  // Replace the existing smiskis state management with filtered version
   const filteredSmiskis = smiskis.filter((s) => s.count > 0);
 
   return (
@@ -332,13 +300,6 @@ export function SmiskiProvider({ children }: { children: ReactNode }) {
         incrementCount,
         decrementCount,
         removeSmiski,
-        filterMissing,
-        toggleFilterMissing,
-        filterSeries,
-        setFilterSeries,
-        viewMode,
-        setViewMode,
-        getSeriesColor,
         loading,
         syncWithCloud,
       }}
