@@ -64,8 +64,6 @@ const config = [
 
       "@typescript-eslint/no-empty-function": "off",
 
-      "react-hooks/set-state-in-effect": "off",
-
       "prettier/prettier": ["error", { endOfLine: "auto" }],
     },
   },

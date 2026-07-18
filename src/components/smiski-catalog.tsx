@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { CatalogFilter, CatalogToolbar, SmiskiTile } from "@/components";
 import { DISCONTINUED_SERIES, SMISKI_DATA } from "@/lib";
@@ -12,13 +12,21 @@ type Props = {
   includeDiscontinued: boolean;
 };
 
+function readSessionCatalogFilter(): CatalogFilter {
+  if (typeof window === "undefined") return "all";
+  const saved = sessionStorage.getItem("catalogFilter");
+  return saved ? (saved as CatalogFilter) : "all";
+}
+
 export function SmiskiCatalog({
   selectedSeries,
   includeSecrets,
   includeDiscontinued,
 }: Props) {
   const { smiskis, addSmiski, incrementCount, decrementCount } = useSmiski();
-  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>("all");
+  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>(
+    readSessionCatalogFilter,
+  );
 
   const allSeries = useMemo(() => Object.keys(SMISKI_DATA), []);
 
@@ -30,15 +38,10 @@ export function SmiskiCatalog({
     [allSeries, includeDiscontinued],
   );
 
-  useEffect(() => {
-    const savedCatalogFilter = sessionStorage.getItem("catalogFilter");
-    if (savedCatalogFilter)
-      setCatalogFilter(savedCatalogFilter as CatalogFilter);
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem("catalogFilter", catalogFilter);
-  }, [catalogFilter]);
+  const handleCatalogFilterChange = (filter: CatalogFilter) => {
+    setCatalogFilter(filter);
+    sessionStorage.setItem("catalogFilter", filter);
+  };
 
   // Get Smiski from collection if it exists
   const getSmiskiFromCollection = (name: string, series: string) => {
@@ -103,7 +106,7 @@ export function SmiskiCatalog({
     <div className="space-y-4">
       <CatalogToolbar
         catalogFilter={catalogFilter}
-        onCatalogFilterChange={setCatalogFilter}
+        onCatalogFilterChange={handleCatalogFilterChange}
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
