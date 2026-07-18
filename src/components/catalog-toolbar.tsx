@@ -15,7 +15,6 @@ const FILTERS: { value: CatalogFilter; label: string }[] = [
   { value: "owned", label: "Owned" },
   { value: "missing", label: "Missing" },
   { value: "secrets", label: "Secrets" },
-  { value: "discontinued", label: "Discontinued" },
 ];
 
 export function CatalogToolbar({

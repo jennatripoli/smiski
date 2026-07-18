@@ -2,12 +2,7 @@
 
 import { useCallback, useState } from "react";
 
-import {
-  CompletionChart,
-  LoadingSkeleton,
-  SmiskiCatalog,
-  SyncBanner,
-} from "@/components";
+import { CompletionChart, SmiskiCatalog, SyncBanner } from "@/components";
 import { useSmiski } from "@/providers";
 
 function readSessionBool(key: string, defaultValue: boolean) {
@@ -41,10 +36,10 @@ export function SmiskiApp() {
     setSelectedSeries((prev) => (prev === series ? "ALL" : series));
   };
 
-  if (loading) return <LoadingSkeleton />;
+  if (loading) return <div className="h-dvh" />;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <SyncBanner />
       <CompletionChart
         smiskis={smiskis}
